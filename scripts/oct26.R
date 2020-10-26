@@ -15,6 +15,19 @@ model_1 <- lm(weight ~ height, data = ansur_df)
 # let's look at the coefficients
 coef(model_1)
 
+betas <- coef(model_1)
+
+# predicted mean of weight for 
+# a person whose height is 165
+betas[1] + betas[2] * 165
+
 # weight predicted from height and age
 model_2 <- lm(weight ~ height + age, data = ansur_df)
 
+betas <- coef(model_2)
+
+# predicted mean of weight for 
+# a person whose height is 165 and aged 25
+betas[1] + betas[2] * 165 + betas[3] * 25
+
+sigma(model_2)
