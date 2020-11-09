@@ -40,5 +40,43 @@ anova(model_null, model_a)
 # Using binary predictor variables
 model_hg <- lm(weight ~ height + gender, data = ansur_df)
 
-ansur_df_new <- expand_grid(height = seq(140, 200),
-                            gender = c('female', 'male'))
+expand_grid(height = seq(140, 200),
+            gender = c('female', 'male')) %>% 
+  add_predictions(model_hg) %>% 
+  ggplot(aes(x = height, y = pred, colour = gender)) +
+  geom_line()
+
+# looking at race
+ansur_df2 <- filter(ansur_df,
+       race %in% c('white', 'black', 'hispanic')
+)
+# Using binary predictor variables
+model_hr <- lm(weight ~ height + race, data = ansur_df2)
+summary(model_hr)
+
+expand_grid(height = seq(140, 200),
+            race = c('white', 'black', 'hispanic')) %>% 
+  add_predictions(model_hr) %>% 
+  ggplot(aes(x = height, y = pred, colour = race)) +
+  geom_line()
+
+model_h <- lm(weight ~ height, data = ansur_df2)
+anova(model_h, model_hr)
+
+
+# varying slope and varying intercept model
+
+# vi
+model_hg <- lm(weight ~ height + gender, data = ansur_df)
+
+# vi and vs 
+model_hg_i <- lm(weight ~ height * gender, data = ansur_df)
+
+expand_grid(height = seq(140, 200),
+            gender = c('female', 'male')) %>% 
+  add_predictions(model_hg_i) %>% 
+  ggplot(aes(x = height, y = pred, colour = gender)) +
+  geom_line()
+
+
+anova(model_hg, model_hg_i)
