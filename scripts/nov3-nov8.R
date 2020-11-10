@@ -56,3 +56,42 @@ data.frame(yearsmarried = c(1, 5, 10, 15, 20, 25)) %>%
 # predicted probabilities
 data.frame(yearsmarried = c(1, 5, 10, 15, 20, 25)) %>% 
   add_predictions(M, type = 'response')
+
+
+# meaning of coeffcients
+# 
+# this value
+coef(M)['yearsmarried']
+# is just the change in the log odds (of cheating) for a 1 unit 
+# change in yearsmarried (an extra year of marriage)
+
+# The following:
+# e ^ coefficient 
+# is the *odds ratio* corresponding to a 1 unit change in yearsmarried
+
+# odds ratio: the factor by which the odds increases
+# for every unit change in the predictor ....
+# this holds for all predictors .... 
+
+# nested model comparison
+
+M1 <- glm(cheater ~ gender + age + children + yearsmarried + rating, 
+          data = affairs_df, 
+          family = binomial(link = 'logit'))
+
+M2 <- glm(cheater ~ age + yearsmarried + rating, 
+          data = affairs_df, 
+          family = binomial(link = 'logit'))
+
+M3 <- glm(cheater ~ age + children + yearsmarried + rating, 
+          data = affairs_df, 
+          family = binomial(link = 'logit'))
+
+anova(M2, M1, test = 'Chisq')
+anova(M2, M3, test = 'Chisq')
+anova(M3, M1, test = 'Chisq')
+
+M4 <- glm(cheater ~ gender + age + children + yearsmarried + religiousness + occupation + education + rating, 
+          data = affairs_df, 
+          family = binomial(link = 'logit'))
+
