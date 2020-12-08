@@ -5,6 +5,7 @@ date: "December 7, 2020"
 output:
   pdf_document:
     keep_tex: true
+bibliography: refs.bib
 ---
 
 
@@ -85,7 +86,22 @@ p1
 ```
 
 
+As was shown in @cartwright1991planning and in @murphy1996chaos.
+
+# A formula 
+
+$$
+y_i \sim N(\mu, \sigma^2),\quad \mu = \beta_0 + \beta_1 x_i 
+$$
+
+```{r, results = 'hide'}
+x <- rnorm(10, mean = 100, sd = 10)
+x
+```
+
+The mean of `x` is `r round(mean(x), 3)`.
 
 
+\newpage
 
-As you can see in Figure \ref{fig:histgrid}.
+# References
