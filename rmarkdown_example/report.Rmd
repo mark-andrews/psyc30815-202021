@@ -1,5 +1,5 @@
 ---
-title: "My second RMarkdown file"
+title: "A Report"
 author: "Sir Mark Andrews"
 date: "December 7, 2020"
 output:
@@ -16,7 +16,6 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```{r}
 library(tidyverse)
 library(pander)
-panderOptions('digits',2)
 library(knitr)
 library(cowplot)
 ```
@@ -70,21 +69,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consequat tincidunt
 
 In eu dui ut libero tincidunt rhoncus non quis ipsum. Ut dictum tortor justo, tempus pharetra metus iaculis sed. In volutpat nisl at nulla porttitor, quis sagittis erat elementum. Aliquam placerat augue nec lobortis porta. In ultrices, felis vel lacinia malesuada, orci nisl interdum ipsum, id convallis mi tellus et eros. Sed porttitor mauris tristique blandit sollicitudin. Sed felis odio, scelerisque non gravida eget, cursus nec nulla. Sed vulputate quam neque, ut tempor nunc finibus vitae.
 
-Proin scelerisque in orci a bibendum. Suspendisse in risus mi. Phasellus quam urna, bibendum vitae condimentum ac, imperdiet sit amet neque. Aenean non condimentum urna, ac volutpat magna. Pellentesque arcu nunc, imperdiet at enim et, mollis varius sapien. Donec non diam sed mi convallis egestas. Curabitur suscipit, sem non faucibus efficitur, tortor nisl volutpat orci, id tristique leo turpis ut nisl. Quisque mollis mi vel tristique dignissim.
 
-Praesent tincidunt tincidunt semper. Pellentesque hendrerit dignissim nibh, in eleifend lectus. Maecenas rhoncus odio id imperdiet imperdiet. Praesent finibus, ipsum quis tincidunt elementum, mauris orci tincidunt nisl, quis condimentum enim ante vel lacus. Pellentesque molestie tempor suscipit. Ut sit amet aliquet augue, ut porttitor turpis. Donec dapibus purus mauris, at varius nisi pellentesque vel. Etiam condimentum porttitor metus, ac scelerisque dui suscipit rhoncus. Sed ante nisi, aliquam ac malesuada feugiat, cursus ac risus. Mauris a massa tortor. Vivamus vel elit et quam dignissim bibendum non ac nisl. Duis id blandit orci.
-
-Nulla sed nisi sed sapien venenatis gravida vel vitae augue. Proin ac lorem fermentum velit pulvinar iaculis. Aenean pellentesque lacinia magna, et ultrices dui vestibulum quis. Vestibulum tincidunt dapibus leo, quis semper nulla ultrices at. Nulla facilisi. Ut dignissim a turpis tristique porttitor. Integer fringilla ante dui, vitae consectetur dui blandit et. Etiam fringilla, massa et tempor posuere, enim purus ornare lorem, eu pulvinar odio nisi sed leo. Maecenas nunc eros, dictum vel euismod id, convallis quis est. Donec dapibus enim sit amet porta fringilla. Pellentesque sollicitudin accumsan convallis. Aliquam molestie semper neque quis fermentum. Cras auctor neque et mauris euismod tempor. Ut interdum rhoncus purus, et venenatis eros ultricies et. Suspendisse accumsan sit amet metus vitae bibendum.
-
-
-
-```{r qwerty, fig.cap = 'Side by side plots.'}
+```{r colorhistogram, fig.height = 3, fig.cap = 'Side by side plots.',fig.align='center'}
 p1 <- ggplot(data_df, aes(x = education, fill = gender)) + geom_histogram(bins = 10, colour = 'white') + theme_classic() + theme(legend.position = "none")
-# p2 <- ggplot(data_df, aes(x = education, fill = job)) + geom_histogram(bins = 10, colour = 'white') + theme_classic() + theme(legend.position = "none")
-# plot_grid(p1, p2, labels = 'AUTO')
-p1
+p2 <- ggplot(data_df, aes(x = education, fill = job)) + geom_histogram(bins = 10, colour = 'white') + theme_classic() + theme(legend.position = "none")
+plot_grid(p1, p2, labels = 'auto')
 ```
 
+As we can see in Figure \ref{fig:colorhistogram}a and also in Figure \ref{fig:colorhistogram}b, vulputate quam neque, ut tempor nunc finibus vitae.
 
 As was shown in @cartwright1991planning and in @murphy1996chaos.
 
@@ -101,7 +93,5 @@ x
 
 The mean of `x` is `r round(mean(x), 3)`.
 
-
-\newpage
 
 # References
